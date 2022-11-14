@@ -1,7 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -47,7 +46,7 @@
     <header class="blog-header py-3">
       <div class="row flex-nowrap justify-content-between align-items-center">
         <div class="col-4 pt-1">
-          <a class="text-muted" href="#"><i class="fas fa-id-card"></i> <span th:text="#{blog.subscribe}">Subscribe</span></a>
+          <a class="text-muted" href="signup.html" th:href="@{/signup}"><i class="fas fa-id-card"></i> <span th:text="#{blog.subscribe}">Subscribe</span></a>
         </div>
         <div class="col-4 text-center">
           <!-- <a class="blog-header-logo text-dark" href="#">Large</a> --> <!--Prestar atenção no th:src para tag com src e href para tags com href e assim por diante-->
