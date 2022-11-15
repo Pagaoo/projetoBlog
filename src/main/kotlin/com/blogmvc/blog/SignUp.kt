@@ -9,7 +9,6 @@ class SignUp {
 
     @RequestMapping("/signup", method = [RequestMethod.GET])
     fun signup(): String {
-        println("singnup()...")
         return "signup"
     }
 }
