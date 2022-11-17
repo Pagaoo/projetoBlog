@@ -24,8 +24,8 @@ class SignUpController(private val repository: UserRepository) {
     }
 
     @PostMapping
-    fun save(user: User, confirmPassword: String, model: Model) : String {
-        logger.info("save(${user})...")
+    fun createUser(user: User, confirmPassword: String, model: Model) : String {
+        logger.info("createUser(${user})...")
 
         if(user.password != confirmPassword) {
             val messageError = "As senhas não são iguais"
