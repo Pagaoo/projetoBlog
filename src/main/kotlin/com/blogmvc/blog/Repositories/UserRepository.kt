@@ -1,4 +1,4 @@
-package com.blogmvc.blog
+package com.blogmvc.blog.Repositories
 
 import com.blogmvc.blog.Model.User
 import org.springframework.data.jpa.repository.JpaRepository
