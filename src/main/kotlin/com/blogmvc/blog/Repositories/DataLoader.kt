@@ -1,4 +1,4 @@
-package com.blogmvc.blog
+package com.blogmvc.blog.Repositories
 
 import com.blogmvc.blog.Model.Category
 import com.blogmvc.blog.Model.User
@@ -14,7 +14,6 @@ class DataLoader(private val userRepository: UserRepository, private val categor
 
     override fun run(vararg args: String?) {
         loadUser()
-        loadCategories()
     }
 
     private fun loadCategories() {
