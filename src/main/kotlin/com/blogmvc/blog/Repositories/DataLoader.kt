@@ -14,6 +14,7 @@ class DataLoader(private val userRepository: UserRepository, private val categor
 
     override fun run(vararg args: String?) {
         loadUser()
+        loadCategories()
     }
 
     private fun loadCategories() {
