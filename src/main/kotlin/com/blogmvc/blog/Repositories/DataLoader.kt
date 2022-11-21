@@ -1,20 +1,28 @@
 package com.blogmvc.blog.Repositories
 
+import com.blogmvc.blog.Model.Article
+import com.blogmvc.blog.Model.Author
 import com.blogmvc.blog.Model.Category
 import com.blogmvc.blog.Model.User
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Configuration
+import java.time.LocalDateTime
 
 @Configuration
-class DataLoader(private val userRepository: UserRepository, private val categoryRepository: CategoryRepository): CommandLineRunner {
+class DataLoader(private val userRepository: UserRepository,
+                 private val categoryRepository: CategoryRepository,
+                 private val articleRepository: ArticleRepository,
+                 private val authorRepository: AuthorRepository
+): CommandLineRunner {
 
     private val logger: Logger = LoggerFactory.getLogger(javaClass)
 
     override fun run(vararg args: String?) {
         loadUser()
         loadCategories()
+        loadArticle()
     }
 
     private fun loadCategories() {
@@ -44,6 +52,36 @@ class DataLoader(private val userRepository: UserRepository, private val categor
                 password = "admin"
             )
             userRepository.save(user).also { logger.info(it.toString()) }
+        }
+    }
+
+    private fun loadArticle() {
+        if (articleRepository.count() == 0L) {
+            val user = userRepository.findAll().get(0)
+            val author = authorRepository.save(Author(user = user))
+            listOf(
+                Article(
+                    title = "Lorem ipsum dolor sit amet, consectetur adipiscing",
+                    subTitle = "elit, sed do eiusmod",
+                    content = "Faucibus ornare suspendisse sed nisi. Gravida quis blandit turpis cursus. Vulputate mi sit amet mauris commodo quis imperdiet massa. Risus sed vulputate odio ut enim blandit. Quis blandit turpis cursus in hac habitasse platea dictumst.",
+                    date = LocalDateTime.now(),
+                    author = author
+                ),
+                Article(
+                    title = "Pharetra convallis",
+                    subTitle = "pharetra vel",
+                    content = "Faucibus ornare suspendisse sed nisi. Gravida quis blandit turpis cursus. Vulputate mi sit amet mauris commodo quis imperdiet massa. Risus sed vulputate odio ut enim blandit.",
+                    date = LocalDateTime.now(),
+                    author = author
+                ),
+                Article(
+                    title = "convallis convallis",
+                    subTitle = "Consectetur",
+                    content = "Nibh tellus molestie nunc non blandit massa enim. Ipsum dolor sit amet consectetur.",
+                    date = LocalDateTime.now(),
+                    author = author
+                )
+            ).also { articleRepository.saveAll(it) }
         }
     }
 }
