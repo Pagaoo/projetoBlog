@@ -14,5 +14,9 @@ data class Author(
     var id: Long = 0,
     var about: String = "",
     @OneToOne
-    var user: User = User()
+    var user: User = User(),
+
+    var facebook: String = "",
+    var twitter: String = "",
+    var linkedin: String = ""
 )
