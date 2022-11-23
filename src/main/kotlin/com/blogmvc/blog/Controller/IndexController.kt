@@ -20,7 +20,7 @@ class IndexController(private val categoryRepository: CategoryRepository, privat
     fun index(@RequestParam(name = "page", required = false, defaultValue = "0") page: Int, model: Model): String {
         logger.info("index()...")
 
-        val articles = articleRepository.findAll(PageRequest.of(page, 2))
+        val articles = articleRepository.findAll(PageRequest.of(page, 1))
         val nextPage = if (page >= articles.totalElements-1) page else page+1
         val previousPage = if (page <= 0) 0 else page-1
 
@@ -30,6 +30,7 @@ class IndexController(private val categoryRepository: CategoryRepository, privat
         model.addAttribute("previousPage", previousPage)
         model.addAttribute("isFirst", articles.isFirst)
         model.addAttribute("isLast", articles.isLast)
+        model.addAttribute("author", articles.content.get(0).author)
 
         return "index"
     }
