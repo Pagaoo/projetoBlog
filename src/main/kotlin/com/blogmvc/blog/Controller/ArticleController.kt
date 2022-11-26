@@ -51,4 +51,10 @@ class ArticleController(private val authorRepository: AuthorRepository, private 
 
         return "redirect:/"
     }
+
+    @GetMapping("/list")
+    fun listAllArticles(): String {
+        logger.info("listAllArticles()....")
+        return "article-list"
+    }
 }
