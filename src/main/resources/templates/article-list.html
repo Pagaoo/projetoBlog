@@ -31,9 +31,70 @@
 
 </head>
 <body class="container">
+    <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-4 pt-1">
+                <a class="text-muted" href="signup.html" th:href="@{/signup}" th:if="${session.currentUser == null}">
+                    <i class="fas fa-id-card"></i> <span th:text="#{blog.subscribe}">Subscribe</span>
+                </a>
+            </div>
+            <div class="col-4 text-center">
+                <!-- <a class="blog-header-logo text-dark" href="#">Large</a> --> <!--Prestar atenção no th:src para tag com src e href para tags com href e assim por diante-->
+                <img src="../static/images/blog-logo.png" alt="Logo" height="50px" th:src="@{/images/blog-logo.png}"/>
+            </div>
+            <div class="col-4 d-flex justify-content-end align-items-center">
+                <a class="btn btn-sm btn-outline-secondary" href="login.html" th:href="@{/login}" th:if="${session.currentUser == null}">
+                    <i class="fas fa-sign-in-alt"></i> <span th:text="#{blog.signIn}">Sign in</span>
+                </a>
 
-    <div class="jumbotron">
-        <h2>Artigos</h2>
+                <div class="dropdown" th:if="${session.currentUser != null}">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span th:text="${session.currentUser.name}"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <li><a class="dropdown-item" href="article.html" th:href="@{/article}">Novo Artigo</a></li>
+                        <li><a class="dropdown-item" href="#">Meus Artigos</a></li>
+                        <li><a class="dropdown-item" href="articles-list.html" th:href="@{/article/list}">Todos Artigos</a></li>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="login.html" th:href="@{/login/logout}">Sair</a>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <div class="nav-scroller py-1 mb-2">
+        <nav class="nav d-flex justify-content-between">
+            <a class="p-2 text-muted" href="#" th:each="category: ${categories}"><span th:text="${category.name}"></span></a>
+        </nav>
+    </div>
+
+    <div class="jumbotron text-white bg-dark text-center">
+        <h1 class="font-italic">Artigos</h1>
+        <a href="article.html" class="btn btn-success" th:href="@{/article}">Novo Artigo</a>
+    </div>
+
+    <div th:each="article: ${articles}">
+        <div class="card blog-post">
+            <h1 class="blog-post-title card-header" th:text="${article.title}">Sample blog post</h1>
+
+            <div class="card-body">
+                <h5 class="card-title text-muted" th:text="${article.subTitle}"></h5>
+                <p th:text="${article.content}">Article Content</p>
+            </div>
+
+            <div class="card-footer text-muted">
+                <div class="badge badge-secondary">
+                    Author: <span th:text="${article.author.user.name}">Article Author</span>
+                </div>
+                <div class="badge badge-secondary">
+                    Date: <span th:text="${article.date}">Article Date</span>
+                </div>
+            </div>
+
+        </div><!-- /.blog-post -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

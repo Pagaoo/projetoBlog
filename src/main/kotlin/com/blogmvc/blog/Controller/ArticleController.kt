@@ -5,8 +5,10 @@ import com.blogmvc.blog.Model.Author
 import com.blogmvc.blog.Model.User
 import com.blogmvc.blog.Repositories.ArticleRepository
 import com.blogmvc.blog.Repositories.AuthorRepository
+import com.blogmvc.blog.Repositories.CategoryRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -19,7 +21,7 @@ import javax.servlet.http.HttpSession
 
 @Controller
 @RequestMapping("/article")
-class ArticleController(private val authorRepository: AuthorRepository, private val articleRepository: ArticleRepository) {
+class ArticleController(private val authorRepository: AuthorRepository, private val articleRepository: ArticleRepository, private val categoryRepository: CategoryRepository) {
 
     private val logger: Logger = LoggerFactory.getLogger(javaClass)
 
@@ -53,8 +55,10 @@ class ArticleController(private val authorRepository: AuthorRepository, private 
     }
 
     @GetMapping("/list")
-    fun listAllArticles(): String {
+    fun listAllArticles(model: Model): String {
         logger.info("listAllArticles()....")
+        model.addAttribute("articles", articleRepository.findAll(Sort.by(Sort.Direction.DESC, "id")))
+        model.addAttribute("categories", categoryRepository.findAll())
         return "article-list"
     }
 }
