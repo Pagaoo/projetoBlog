@@ -70,4 +70,13 @@ class ArticleController(private val authorRepository: AuthorRepository, private 
         model.addAttribute("categories", categoryRepository.findAll())
         return "article-list"
     }
+
+    @GetMapping("/list/category/{idCategory}")
+    fun listCategoryArticles(@PathVariable idCategory: Long, model: Model): String {
+        logger.info("listAllUserArticles(idUser = $idCategory)....")
+        val sortCategoryArticles = Sort.by(Sort.Direction.DESC, "id")
+        model.addAttribute("articles", articleRepository.findByCategoryId(idCategory, sortCategoryArticles))
+        model.addAttribute("categories", categoryRepository.findAll())
+        return "article-list"
+    }
 }
