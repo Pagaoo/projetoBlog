@@ -67,7 +67,7 @@
 
     <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
-            <a class="p-2 text-muted" href="#" th:each="category: ${categories}"><span th:text="${category.name}"></span></a>
+            <a class="p-2 text-muted" href="article-list.html" th:href="@{/article/list/category/{id}(id=${category.id})}" th:each="category: ${categories}"><span th:text="${category.name}"></span></a>
         </nav>
     </div>
 

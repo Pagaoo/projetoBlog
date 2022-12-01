@@ -63,6 +63,8 @@ class DataLoader(private val userRepository: UserRepository,
 
     private fun loadArticle() {
         if (articleRepository.count() == 0L) {
+            val categoryWorld = categoryRepository.findAll().get(0)
+            val categoryTech = categoryRepository.findAll().get(2)
             val authors = authorRepository.saveAll(
                 listOf(
                     Author(
@@ -87,21 +89,24 @@ class DataLoader(private val userRepository: UserRepository,
                     subTitle = "elit, sed do eiusmod",
                     content = "Faucibus ornare suspendisse sed nisi. Gravida quis blandit turpis cursus. Vulputate mi sit amet mauris commodo quis imperdiet massa. Risus sed vulputate odio ut enim blandit. Quis blandit turpis cursus in hac habitasse platea dictumst.",
                     date = LocalDateTime.now(),
-                    author = authors.get(0)
+                    author = authors.get(0),
+                    category = categoryTech
                 ),
                 Article(
                     title = "Pharetra convallis",
                     subTitle = "pharetra vel",
                     content = "Faucibus ornare suspendisse sed nisi. Gravida quis blandit turpis cursus. Vulputate mi sit amet mauris commodo quis imperdiet massa. Risus sed vulputate odio ut enim blandit.",
                     date = LocalDateTime.now(),
-                    author = authors.get(1)
+                    author = authors.get(1),
+                    category = categoryTech
                 ),
                 Article(
                     title = "convallis convallis",
                     subTitle = "Consectetur",
                     content = "Nibh tellus molestie nunc non blandit massa enim. Ipsum dolor sit amet consectetur.",
                     date = LocalDateTime.now(),
-                    author = authors.get(0)
+                    author = authors.get(0),
+                    category = categoryWorld
                 )
             ).also { articleRepository.saveAll(it) }
         }
