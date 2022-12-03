@@ -69,14 +69,14 @@ class DataLoader(private val userRepository: UserRepository,
                 listOf(
                     Author(
                         user = userRepository.findAll().get(0),
-                        about = "Sadosjadosijoadsijoadsijoadsijoadsijoads",
+                        about = "Sadosjadosijoadsijoad",
                         facebook = "http://facebook.com/admin",
                         twitter = "http://twitter.com/admin",
                         linkedin = "http://linkedin.com/admin"
 
                     ), Author(
                         user = userRepository.findAll().get(1),
-                        about = "asdkadskopadskdaopskdsopdfjksgopfds",
+                        about = "asdkadskopadskdaops",
                         facebook = "http://facebook.com/gabriel",
                         twitter = "http://twitter.com/gabriel",
                         linkedin = "http://linkedin.com/gabriel"

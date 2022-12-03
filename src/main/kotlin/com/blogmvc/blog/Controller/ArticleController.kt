@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -80,4 +81,20 @@ class ArticleController(private val authorRepository: AuthorRepository, private 
         model.addAttribute("categories", categoryRepository.findAll())
         return "article-list"
     }
+
+    @GetMapping("/edit/{idArticle}")
+    fun articleEditPage(@PathVariable idArticle: Long, model: Model): String {
+        logger.info("articleEditPage(id = ${idArticle})...")
+        model.addAttribute("article", articleRepository.findById(idArticle).get())
+        model.addAttribute("categories", categoryRepository.findAll())
+        return "article"
+    }
+
+    @GetMapping("/delete/{idArticle}")
+    fun articleDeletePage(@PathVariable idArticle: Long, model: Model): String {
+        logger.info("articleDeletePage(id = ${idArticle})...")
+        articleRepository.deleteById(idArticle)
+        return "redirect:/article/list"
+    }
+
 }
