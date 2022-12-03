@@ -30,6 +30,7 @@ class ArticleController(private val authorRepository: AuthorRepository, private 
     fun articlePage(model: Model): String {
         logger.info("articlePage()...")
         model.addAttribute("article", Article())
+        model.addAttribute("categories", categoryRepository.findAll())
         return "article"
     }
 
