@@ -1,7 +1,7 @@
 package com.blogmvc.blog.Controller
 
 import com.blogmvc.blog.Model.User
-import com.blogmvc.blog.Repositories.UserRepository
+import com.blogmvc.blog.Repository.UserRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller

@@ -1,9 +1,13 @@
-package com.blogmvc.blog.Repositories
+package com.blogmvc.blog
 
 import com.blogmvc.blog.Model.Article
 import com.blogmvc.blog.Model.Author
 import com.blogmvc.blog.Model.Category
 import com.blogmvc.blog.Model.User
+import com.blogmvc.blog.Repository.ArticleRepository
+import com.blogmvc.blog.Repository.AuthorRepository
+import com.blogmvc.blog.Repository.CategoryRepository
+import com.blogmvc.blog.Repository.UserRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner

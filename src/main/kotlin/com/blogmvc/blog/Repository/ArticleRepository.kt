@@ -1,4 +1,4 @@
-package com.blogmvc.blog.Repositories
+package com.blogmvc.blog.Repository
 
 import com.blogmvc.blog.Model.Article
 import org.springframework.data.domain.Sort

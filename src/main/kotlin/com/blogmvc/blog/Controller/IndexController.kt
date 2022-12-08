@@ -1,7 +1,7 @@
 package com.blogmvc.blog.Controller
 
-import com.blogmvc.blog.Repositories.ArticleRepository
-import com.blogmvc.blog.Repositories.CategoryRepository
+import com.blogmvc.blog.Repository.ArticleRepository
+import com.blogmvc.blog.Repository.CategoryRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.data.domain.PageRequest
