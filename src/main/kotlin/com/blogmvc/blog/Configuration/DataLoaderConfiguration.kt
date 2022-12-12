@@ -1,4 +1,4 @@
-package com.blogmvc.blog
+package com.blogmvc.blog.Configuration
 
 import com.blogmvc.blog.Model.Article
 import com.blogmvc.blog.Model.Author
@@ -15,10 +15,10 @@ import org.springframework.context.annotation.Configuration
 import java.time.LocalDateTime
 
 @Configuration
-class DataLoader(private val userRepository: UserRepository,
-                 private val categoryRepository: CategoryRepository,
-                 private val articleRepository: ArticleRepository,
-                 private val authorRepository: AuthorRepository
+class DataLoaderConfiguration(private val userRepository: UserRepository,
+                              private val categoryRepository: CategoryRepository,
+                              private val articleRepository: ArticleRepository,
+                              private val authorRepository: AuthorRepository
 ): CommandLineRunner {
 
     private val logger: Logger = LoggerFactory.getLogger(javaClass)
