@@ -85,7 +85,8 @@
                 <p th:text="${article.content}">Article Content</p>
 
                 <a href="article.html" class="btn btn-light btn-secondary"
-                   th:href="@{/article/edit/{id}(id=${article.id})}" th:if="${article.author.user.id == session.currentUser.id}">
+                   th:href="@{/article/edit/{id}(id=${article.id})}"
+                   th:if="${article.author.user.id == session.currentUser.id}">
                     <i class="fas fa-edit"></i>
                 </a>
 

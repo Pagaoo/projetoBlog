@@ -1,7 +1,7 @@
 package com.blogmvc.blog.Controller
 
 import com.blogmvc.blog.Model.User
-import com.blogmvc.blog.Repository.UserRepository
+import com.blogmvc.blog.Services.UserService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession
 
 @Controller
 @RequestMapping("/login")
-class LoginController(private val repository: UserRepository) {
+class LoginController(private val userService: UserService) {
 
     private val logger: Logger = LoggerFactory.getLogger(javaClass)
 
@@ -28,7 +28,7 @@ class LoginController(private val repository: UserRepository) {
     fun login(user: User, model: Model, session: HttpSession): String {
         logger.info("login()...")
 
-        val findUser = repository.findByEmail(user.email)
+        val findUser = userService.findByEmail(user.email)
         val messageErrorLogin = "Senha ou E-mail inválido"
 
         if (findUser.isEmpty) {

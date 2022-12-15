@@ -1,11 +1,7 @@
 package com.blogmvc.blog.Controller
 
 import com.blogmvc.blog.Model.Article
-import com.blogmvc.blog.Model.Author
 import com.blogmvc.blog.Model.User
-import com.blogmvc.blog.Repository.ArticleRepository
-import com.blogmvc.blog.Repository.AuthorRepository
-import com.blogmvc.blog.Repository.CategoryRepository
 import com.blogmvc.blog.Services.ArticleService
 import com.blogmvc.blog.Services.CategoryService
 import org.slf4j.Logger
@@ -18,8 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
-import java.time.LocalDateTime
-import java.util.Optional
 import javax.servlet.http.HttpSession
 
 @Controller
@@ -51,7 +45,7 @@ class ArticleController(private val categoryService: CategoryService, private va
     @GetMapping("/list")
     fun listAllArticles(model: Model): String {
         logger.info("listAllArticles()....")
-        model.addAttribute("articles", articleService.findAll())
+        model.addAttribute("articles", articleService.findAllPage()) // aqui
         model.addAttribute("categories", categoryService.findAll())
         return "article-list"
     }
@@ -66,7 +60,7 @@ class ArticleController(private val categoryService: CategoryService, private va
 
     @GetMapping("/list/category/{idCategory}")
     fun listCategoryArticles(@PathVariable idCategory: Long, model: Model): String {
-        logger.info("listAllUserArticles(idUser = $idCategory)....")
+        logger.info("listAllUsersArticles(idCategory = $idCategory)....")
         val sortCategoryArticles = Sort.by(Sort.Direction.DESC, "id")
         model.addAttribute("articles", articleService.findByCategoryId(idCategory, sortCategoryArticles))
         model.addAttribute("categories", categoryService.findAll())

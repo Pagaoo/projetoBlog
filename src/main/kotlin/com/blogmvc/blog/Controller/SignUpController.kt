@@ -2,6 +2,7 @@ package com.blogmvc.blog.Controller
 
 import com.blogmvc.blog.Model.User
 import com.blogmvc.blog.Repository.UserRepository
+import com.blogmvc.blog.Services.UserService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
 @RequestMapping("/signup")
-class SignUpController(private val repository: UserRepository) {
+class SignUpController(private val userService: UserService) {
 
     private val logger: Logger = LoggerFactory.getLogger(javaClass)
 
@@ -34,7 +35,7 @@ class SignUpController(private val repository: UserRepository) {
             return "signup"
         }
 
-        repository.save(user).also { logger.info(user.toString()) }
+        userService.save(user).also { logger.info(user.toString()) }
         return "redirect:/login"
     }
 }

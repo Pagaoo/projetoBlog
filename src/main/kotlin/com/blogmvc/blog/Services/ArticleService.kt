@@ -7,6 +7,8 @@ import com.blogmvc.blog.Repository.ArticleRepository
 import com.blogmvc.blog.Repository.AuthorRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
@@ -31,8 +33,9 @@ class ArticleService(private val articleRepository: ArticleRepository, private v
         return articleRepository.save(article)
     }
 
-    fun findAll(): List<Article> {
-        return articleRepository.findAll(Sort.by(Sort.Direction.DESC, "id"))
+    fun findAll(page: Int): Page<Article> {
+        val pageRequest = PageRequest.of(page,1, Sort.by(Sort.Direction.DESC, "id"))
+        return articleRepository.findAll(pageRequest)
     }
 
     fun findByAuthorUserId(idUser: Long, sortUserArticles: Sort): List<Article> {
@@ -49,5 +52,9 @@ class ArticleService(private val articleRepository: ArticleRepository, private v
 
     fun deleteById(idArticle: Long) {
         return articleRepository.deleteById(idArticle)
+    }
+
+    fun findAllPage(): List<Article> {
+        return articleRepository.findAll()
     }
 }

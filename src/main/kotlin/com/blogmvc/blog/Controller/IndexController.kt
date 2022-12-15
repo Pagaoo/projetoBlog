@@ -1,10 +1,9 @@
 package com.blogmvc.blog.Controller
 
-import com.blogmvc.blog.Repository.ArticleRepository
-import com.blogmvc.blog.Repository.CategoryRepository
+import com.blogmvc.blog.Services.ArticleService
+import com.blogmvc.blog.Services.CategoryService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -13,18 +12,18 @@ import org.springframework.web.bind.annotation.RequestParam
 
 @Controller
 @RequestMapping("/")
-class IndexController(private val categoryRepository: CategoryRepository, private val articleRepository: ArticleRepository) {
+class IndexController(private val categoryService: CategoryService, private val articleService: ArticleService) {
     private val logger: Logger = LoggerFactory.getLogger(javaClass)
 
     @GetMapping
     fun index(@RequestParam(name = "page", required = false, defaultValue = "0") page: Int, model: Model): String {
         logger.info("index()...")
 
-        val articles = articleRepository.findAll(PageRequest.of(page, 1))
+        val articles = articleService.findAll(page)
         val nextPage = if (page >= articles.totalElements-1) page else page+1
         val previousPage = if (page <= 0) 0 else page-1
 
-        model.addAttribute("categories",categoryRepository.findAll())
+        model.addAttribute("categories",categoryService.findAll())
         model.addAttribute("articles", articles)
         model.addAttribute("nextPage", nextPage)
         model.addAttribute("previousPage", previousPage)
